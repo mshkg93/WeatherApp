@@ -1,29 +1,24 @@
-import {useState, useRef, useContext, useEffect} from 'react';
+import {useState, useRef, useContext} from 'react';
 
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import {CoordsContext} from '../context/coordsContext';
-import {setIsLoading, setData} from '../store/weatherSlice';
-import {fetchCityData} from '../store/weather-actions';
+
+import {fetchCityData, fetchCityName} from '../store/weather-actions';
 import {Button, TextField} from '@mui/material';
 
 export default function Form() {
-  // const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
   const {lat, lng} = useContext(CoordsContext);
   const [city, setCity] = useState('');
   const cityInput = useRef(null);
-  const countryData = useSelector((state) => state.weather);
+
   const dispatch = useDispatch();
 
-  console.log(countryData);
   function submitFormHandler(e) {
     e.preventDefault();
-    if (cityInput.current.value === '') {
-      dispatch(fetchCityData(lat, lng));
-    }
-    // dispatch(setIsLoading(true));
-    // dispatch(fetchCityData(cityInput.current.value));
-    // dispatch(setIsLoading(false));
+    cityInput.current.value === '' &&
+      dispatch(fetchCityData(lat, lng)) &&
+      dispatch(fetchCityName(lat, lng));
   }
 
   return (
@@ -35,7 +30,7 @@ export default function Form() {
       }}>
       <label htmlFor={cityInput}>
         <TextField
-          className='w-full text-white md:w-[400px] md:max-w-[500px]'
+          className='w-full text-white md:w-[350px] md:max-w-[500px]'
           id='filled'
           type='text'
           label='Type desired city'

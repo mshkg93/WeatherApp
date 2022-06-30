@@ -6,7 +6,7 @@ import {CoordsContext} from './context/coordsContext';
 // import CoordsContextProvider from './context/CoordsContextProvider';
 import WeatherContainer from './components/WeatherContainer';
 
-import {fetchCityData} from './store/weather-actions';
+import {fetchCityData, fetchCityName} from './store/weather-actions';
 
 import {Container} from '@mui/material';
 import LoopIcon from '@mui/icons-material/Loop';
@@ -27,13 +27,13 @@ function App() {
       setLat(position.coords.latitude);
       setLng(position.coords.longitude);
     });
-    // dispatch(fetchCityData(lat, lng));
   }, [lat, lng]);
 
   useEffect(() => {
-    lat !== 'null' &&
-      lng !== 'null' &&
-      dispatch(fetchCityData(lat, lng));
+    lat &&
+      lng &&
+      dispatch(fetchCityData(lat, lng)) &&
+      dispatch(fetchCityName(lat, lng));
   }, [dispatch, lat, lng]);
 
   // console.log(data);
