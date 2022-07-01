@@ -1,5 +1,3 @@
-// import {useSelector} from 'react-redux';
-
 import {setData, setCityData} from './weatherSlice';
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
@@ -21,7 +19,6 @@ export const fetchCityData = (lat, lon) => {
       const weatherData = await fetchData();
       dispatch(setData(weatherData));
     } catch (err) {
-      // console.log(err);
       throw new Error(
         `Something went wrong! ${err.message[0].toUpperCase()}${err.message.slice(
           1

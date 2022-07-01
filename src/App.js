@@ -1,24 +1,15 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import axios from 'axios';
+import React, {useEffect, useContext} from 'react';
+import {useDispatch} from 'react-redux';
 
 import {CoordsContext} from './context/coordsContext';
-// import CoordsContextProvider from './context/CoordsContextProvider';
-import WeatherContainer from './components/WeatherContainer';
-
 import {fetchCityData, fetchCityName} from './store/weather-actions';
 
-import {Container} from '@mui/material';
-import LoopIcon from '@mui/icons-material/Loop';
-import {DownloadingSharp} from '@mui/icons-material';
-import image from './assets/weather-main.jpg';
+import WeatherContainer from './components/WeatherContainer';
+
+import image from './assets/wallpaper.jpg';
 import './App.css';
 
 function App() {
-  const {isLoading, error, data} = useSelector((state) => state);
-  const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
-  const API_KEY = process.env.REACT_APP_API_KEY;
   const dispatch = useDispatch();
   const {lat, setLat, lng, setLng} = useContext(CoordsContext);
 
@@ -27,7 +18,7 @@ function App() {
       setLat(position.coords.latitude);
       setLng(position.coords.longitude);
     });
-  }, [lat, lng]);
+  }, []);
 
   useEffect(() => {
     lat &&
@@ -36,7 +27,6 @@ function App() {
       dispatch(fetchCityName(lat, lng));
   }, [dispatch, lat, lng]);
 
-  // console.log(data);
   return (
     <main
       className='min-w-[100vw]'
@@ -46,13 +36,7 @@ function App() {
         backgroundRepeat: 'no-repeat',
         minHeight: '100vh',
       }}>
-      <WeatherContainer>
-        <DownloadingSharp />
-      </WeatherContainer>
-      <Container>
-        {loading && <LoopIcon />}
-        {/* {{lat};{lng}} */}
-      </Container>
+      <WeatherContainer />
     </main>
   );
 }

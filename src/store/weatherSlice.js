@@ -13,12 +13,6 @@ const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    setLat: (state, action) => {
-      state.lat = action.payload;
-    },
-    setLng: (state, action) => {
-      state.lng = action.payload;
-    },
     setData: (state, action) => {
       state.data = action.payload;
     },
@@ -46,8 +40,6 @@ const weatherSlice = createSlice({
 
 export default weatherSlice.reducer;
 export const {
-  setLat,
-  setLng,
   setData,
   setCityData,
   setIsLoading,

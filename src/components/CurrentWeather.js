@@ -5,7 +5,7 @@ import {SwitchLabels, SwitchDaily} from './ToggleButtonsMetric';
 
 export default function CurrentWeather({weather}) {
   const {current} = weather;
-  const {name, country} = weather[0] || [];
+  const {name, country} = weather || [];
   const units = useSelector((state) => state.weather.units);
 
   // Convert API timestamp to UNIX timestamp => get hours and minutes from converted timestamp
@@ -32,7 +32,6 @@ export default function CurrentWeather({weather}) {
       : (speed * 2.23693629).toFixed(2);
   };
 
-  // console.log(current);
   return (
     <div className='flex flex-col p-4 text-white min-w-full bg-black bg-opacity-30 rounded-lg'>
       <div className='flex w-full justify-between'>
@@ -44,7 +43,7 @@ export default function CurrentWeather({weather}) {
       </div>
       <section className='grid w-full grid-cols-1 md:grid-cols-2'>
         <div className='w-[50%]'>
-          <span className='flex gap-2 '>
+          <span className='flex gap-2 justify-center '>
             <h4>City: </h4>{' '}
             <p>{name && country && `${name}, ${country}`}</p>
           </span>
