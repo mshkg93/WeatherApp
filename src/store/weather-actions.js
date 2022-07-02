@@ -32,7 +32,7 @@ export const fetchCityName = (lat, lon) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${API_KEY}`
       );
 
       if (!response.ok) {
